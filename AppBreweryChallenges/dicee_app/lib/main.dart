@@ -31,6 +31,7 @@ class DicePane extends StatefulWidget {
 class _DicePaneState extends State<DicePane> {
   int leftDiceNumber = 1;
   int rightDiceNumber = 1;
+  int sum = 2;
   String doubles = '';
 
   @override
@@ -65,6 +66,14 @@ class _DicePaneState extends State<DicePane> {
             ],
           ),
         ),
+        Text(
+          'You rolled: $sum',
+          style: TextStyle(
+            fontSize: 30.0,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ],
     );
   }
@@ -73,6 +82,7 @@ class _DicePaneState extends State<DicePane> {
     setState(() {
       leftDiceNumber = Random().nextInt(6) + 1;
       rightDiceNumber = Random().nextInt(6) + 1;
+      sum = leftDiceNumber + rightDiceNumber;
       if (leftDiceNumber == rightDiceNumber) {
         doubles = 'Doubles!';
       } else {
