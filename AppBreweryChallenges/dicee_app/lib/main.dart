@@ -19,9 +19,7 @@ void main() {
 class DicePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: DicePane(),
-    );
+    return DicePane();
   }
 }
 
@@ -33,21 +31,38 @@ class DicePane extends StatefulWidget {
 class _DicePaneState extends State<DicePane> {
   int leftDiceNumber = 1;
   int rightDiceNumber = 1;
+  String doubles = '';
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Expanded(
-          child: FlatButton(
-            onPressed: dicePressed,
-            child: Image.asset('images/dice$leftDiceNumber.png'),
+        Text(
+          '$doubles',
+          style: TextStyle(
+            fontSize: 30.0,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        Expanded(
-          child: FlatButton(
-            onPressed: dicePressed,
-            child: Image.asset('images/dice$rightDiceNumber.png'),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 0),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: FlatButton(
+                  onPressed: dicePressed,
+                  child: Image.asset('images/dice$leftDiceNumber.png'),
+                ),
+              ),
+              Expanded(
+                child: FlatButton(
+                  onPressed: dicePressed,
+                  child: Image.asset('images/dice$rightDiceNumber.png'),
+                ),
+              ),
+            ],
           ),
         ),
       ],
@@ -58,6 +73,11 @@ class _DicePaneState extends State<DicePane> {
     setState(() {
       leftDiceNumber = Random().nextInt(6) + 1;
       rightDiceNumber = Random().nextInt(6) + 1;
+      if (leftDiceNumber == rightDiceNumber) {
+        doubles = 'Doubles!';
+      } else {
+        doubles = '';
+      }
     });
   }
 }
