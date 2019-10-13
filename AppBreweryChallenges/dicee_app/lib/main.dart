@@ -59,5 +59,6 @@ class _DicePaneState extends State<DicePane> {
       leftDiceNumber = Random().nextInt(6) + 1;
       rightDiceNumber = Random().nextInt(6) + 1;
     });
+    print('Hello!');
   }
 }
