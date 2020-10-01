@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
-//Style of the label that is displayed below the icon
-const LabelStyle = TextStyle(
-  fontSize: 18.0,
-  color: Color(0xFF8D8E98),
-);
+import 'constants.dart';
 
 class GenderSelection extends StatelessWidget {
   GenderSelection({this.genderIcon, this.textToDisplay});
@@ -27,7 +22,7 @@ class GenderSelection extends StatelessWidget {
         ),
         Text(
           textToDisplay,
-          style: LabelStyle,
+          style: kLabelStyle,
         )
       ],
     );
