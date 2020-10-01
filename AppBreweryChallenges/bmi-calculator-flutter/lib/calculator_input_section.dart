@@ -90,7 +90,7 @@ class _calculator_input_sectionState extends State<calculator_input_section> {
                   ],
                 ),
                 SliderTheme(
-                  data: SliderThemeData,
+                  data: SliderThemeData(),
                   child: Slider(
                     value: height.toDouble(),
                     min: kMinHeight,
