@@ -1,8 +1,13 @@
+import 'package:bmi_calculator/components/bottom_button.dart';
+import 'package:bmi_calculator/screens/results_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'reusable_card.dart';
+import '../components/reusable_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'gender_selection.dart';
-import 'constants.dart';
+import '../components/gender_selection.dart';
+import '../constants.dart';
+import '../components/adjustable_number_with_label.dart';
+import 'package:bmi_calculator/calculator_brain.dart';
 
 class calculator_input_section extends StatefulWidget {
   @override
@@ -15,6 +20,8 @@ class _calculator_input_sectionState extends State<calculator_input_section> {
   Color femaleCardColor = kInactiveCardColor;
 
   int height = 180;
+  int weight = 60;
+  int age = 24;
 
   //1 --> Male
   //2 --> Female
@@ -90,13 +97,18 @@ class _calculator_input_sectionState extends State<calculator_input_section> {
                   ],
                 ),
                 SliderTheme(
-                  data: SliderThemeData(),
+                  data: SliderTheme.of(context).copyWith(
+                    activeTrackColor: Colors.white,
+                    inactiveTrackColor: kInactiveTrackColor,
+                    thumbColor: kThumbColor,
+                    thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                    overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
+                    overlayColor: overlayColor,
+                  ),
                   child: Slider(
                     value: height.toDouble(),
                     min: kMinHeight,
                     max: kMaxHeight,
-                    activeColor: Color(0xFFEB1555),
-                    inactiveColor: Color(0xFF8D8E98),
                     onChanged: (double newHeight) {
                       setState(() {
                         height = newHeight.round();
@@ -114,22 +126,59 @@ class _calculator_input_sectionState extends State<calculator_input_section> {
               Expanded(
                 child: ReusableCard(
                   color: kActiveCardColor,
+                  cardChild: AdjustableNumberWithLabel(
+                    label: 'WEIGHT',
+                    toShow: weight,
+                    decrementAction: () {
+                      setState(() {
+                        weight--;
+                      });
+                    },
+                    incrementAction: () {
+                      setState(() {
+                        weight++;
+                      });
+                    },
+                  ),
                 ),
               ),
               Expanded(
                 child: ReusableCard(
                   color: kActiveCardColor,
+                  cardChild: AdjustableNumberWithLabel(
+                    label: 'AGE',
+                    toShow: age,
+                    decrementAction: () {
+                      setState(() {
+                        age--;
+                      });
+                    },
+                    incrementAction: () {
+                      setState(() {
+                        age++;
+                      });
+                    },
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        Container(
-          color: kBottomContainerColor,
-          margin: EdgeInsets.only(top: 10.0),
-          width: double.infinity,
-          height: kBottomContainerHeight,
-        ),
+        BottomButton(
+          label: 'CALCULATE',
+          onTap: () {
+            CalculatorBrain calc = CalculatorBrain(
+              weight: weight,
+              height: height,
+            );
+
+            Navigator.pushNamed(context, '/results',
+                arguments: ResultsScreenArgs(
+                    bmiResult: calc.calculateBMI(),
+                    bmiInterpretation: calc.getInterpretation(),
+                    bmiResultText: calc.getResult()));
+          },
+        )
       ],
     );
   }

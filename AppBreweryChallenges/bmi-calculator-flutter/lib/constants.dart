@@ -20,3 +20,34 @@ const kNumberStyle = TextStyle(
   fontSize: 50.0,
   fontWeight: FontWeight.w900,
 );
+
+const kLargeButtonTextStyle = TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kResultsHeaderTextStyle = TextStyle(
+  fontSize: 52.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kResultsWeightClassificationTextStyle = TextStyle(
+  fontSize: 24.0,
+  fontWeight: FontWeight.bold,
+  color: Color(0xFF24D876),
+);
+
+const kResultsBMINumberTextStyle = TextStyle(
+  fontSize: 100.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kResultsBodyTextStyle = TextStyle(
+  fontSize: 24.0,
+  color: Color(0xFF8D8E98),
+);
+
+//Slider Colors
+const Color kInactiveTrackColor = Color(0xFF8D8E98);
+const Color kThumbColor = Color(0xFFEB1555);
+const Color overlayColor = Color(0x29EB1555);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class GenderSelection extends StatelessWidget {
   GenderSelection({this.genderIcon, this.textToDisplay});
